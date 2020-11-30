@@ -1,0 +1,74 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+<style>
+    body{
+    background: lawngreen;
+}
+input{
+    width: 100%;
+    padding: 12px 20px;
+    margin:  8px 0 ;
+    box-sizing: border-box;
+
+}
+input::placeholder{
+    color:  rgba(222, 184, 135, 0.801);
+}
+.submit{
+    background-color: bisque;
+}
+.center-column{
+    width: 660px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: aquamarine;
+    border-radius: 3px;
+    box-shadow: 5px 3px 0px rgba(0, 0, 0, 60);
+}
+
+.item-row{
+    background-color: blueviolet;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 3px;
+    color: aqua;
+    font-size: 16px;
+    box-shadow: 0px -1px 10px -4px rgba(0, 0, 0, 75);
+}
+
+.btn-danger{
+    background-color: brown;
+    border-color: blueviolet;
+}
+
+
+
+
+
+
+</style>
+
+
+<div class="center-column">
+    <form method="POST" action="/">
+        {% csrf_token %}
+
+        {{form.Title}}
+        <input class="btn btn-success" type="submit" name="Create Task" value="Add Task">
+    </form>
+
+    <div class="list-group-item list-group-item-action ">
+        {% for task in tasks %}
+        <div class="item-row">
+            <a class="btn-sm btn-info" href="{% url 'update_task' task.id %}">Update</a>
+            <a class="btn-sm btn-danger" href="{% url 'delete' task.id %}">Delete</a>
+
+            {% if Complete == True %}
+            <strike>{{task}}</strike>
+            {% else %}
+            <span>{{task}}</span>
+            {% endif %}
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
